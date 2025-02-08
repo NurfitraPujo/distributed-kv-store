@@ -26,7 +26,24 @@ func kvPutHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	logger.WritePut(key, string(value))
+
 	w.WriteHeader(http.StatusCreated)
+}
+
+func kvDeleteHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	key := vars["key"]
+
+	err := Delete(key)
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+
+	logger.WriteDelete(key)
+
+	w.WriteHeader(http.StatusNoContent)
 }
 
 func kvGetHandler(w http.ResponseWriter, r *http.Request) {
