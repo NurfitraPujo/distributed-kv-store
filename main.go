@@ -27,7 +27,7 @@ func main() {
 func initializeTransactionLogger() error {
 	var err error
 
-	logger, err := NewFileTransactionLogger("transaction.log")
+	logger, err = NewFileTransactionLogger("transaction.log")
 	if err != nil {
 		return fmt.Errorf("failed to initialize transaction logger: %v", err)
 	}

@@ -29,6 +29,7 @@ func kvPutHandler(w http.ResponseWriter, r *http.Request) {
 	logger.WritePut(key, string(value))
 
 	w.WriteHeader(http.StatusCreated)
+	_, _ = w.Write([]byte("CREATED"))
 }
 
 func kvDeleteHandler(w http.ResponseWriter, r *http.Request) {
@@ -44,6 +45,7 @@ func kvDeleteHandler(w http.ResponseWriter, r *http.Request) {
 	logger.WriteDelete(key)
 
 	w.WriteHeader(http.StatusNoContent)
+	_, _ = w.Write([]byte("DELETED"))
 }
 
 func kvGetHandler(w http.ResponseWriter, r *http.Request) {
